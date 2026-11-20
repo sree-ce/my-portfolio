@@ -52,4 +52,7 @@ The output in `dist/` is a static single-page app. Project pages (`/projects/:sl
 
 - **Vercel**: import the repo; `vercel.json` already has the rewrite. Set `VITE_SITE_URL` in project settings.
 - **Netlify**: build command `npm run build`, publish directory `dist`; `public/_redirects` handles the fallback.
-- **GitHub Pages / other static hosts**: configure a 404 → `index.html` fallback, or switch to a host that supports rewrites.
+- **GitHub Pages**: `.github/workflows/deploy.yml` builds on every push to `main` and publishes to `https://<owner>.github.io/<repo>/`. It sets `VITE_BASE_PATH` and `VITE_SITE_URL` automatically and copies `index.html` to `404.html` for deep links. One-time setup: in the repo, go to **Settings → Pages → Build and deployment → Source** and choose **GitHub Actions**. Free GitHub Pages needs a public repo.
+- **Other static hosts**: configure a 404 → `index.html` fallback, or switch to a host that supports rewrites.
+
+For a root domain or local build, leave `VITE_BASE_PATH` unset (defaults to `/`).

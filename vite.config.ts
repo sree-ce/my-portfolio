@@ -101,8 +101,11 @@ function seoPlugin(siteUrl: string): Plugin {
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), 'VITE_')
   const siteUrl = (env.VITE_SITE_URL ?? '').replace(/\/+$/, '')
+  const basePath = (env.VITE_BASE_PATH ?? '').replace(/^\/+|\/+$/g, '')
+  const base = basePath ? `/${basePath}/` : '/'
 
   return {
+    base,
     plugins: [react(), tailwindcss(), resumePlugin(), seoPlugin(siteUrl)],
   }
 })

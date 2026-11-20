@@ -8,7 +8,7 @@ export const site = {
   github: 'https://github.com/sree-ce',
   organization: 'AptlyLabs India Pvt. Ltd.',
   experience: '4+ years',
-  resumePath: '/resume.pdf',
+  resumePath: 'resume.pdf',
   resumeFileName: 'Sreekutty-M-R-Resume.pdf',
   description:
     'Sreekutty M R is a Senior Full-Stack Developer in Kochi, India with 4+ years of experience building web applications with React, TypeScript, Node.js, NestJS and PostgreSQL.',
