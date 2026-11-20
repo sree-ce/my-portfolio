@@ -1,0 +1,131 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --bg: #f5f4f0;
+  --surface: #edece7;
+  --surface-2: #e5e3dc;
+  --fg: #16161a;
+  --muted: #55555d;
+  --subtle: #6a6a72;
+  --line: rgb(22 22 26 / 0.1);
+  --line-strong: rgb(22 22 26 / 0.2);
+  --accent: #5444c4;
+  --accent-fg: #ffffff;
+  --accent-soft: rgb(84 68 196 / 0.1);
+}
+
+.dark {
+  --bg: #0d0d0f;
+  --surface: #141417;
+  --surface-2: #1b1b1f;
+  --fg: #ededeb;
+  --muted: #a3a3ab;
+  --subtle: #82828b;
+  --line: rgb(255 255 255 / 0.08);
+  --line-strong: rgb(255 255 255 / 0.16);
+  --accent: #aba1f6;
+  --accent-fg: #0d0d0f;
+  --accent-soft: rgb(171 161 246 / 0.12);
+}
+
+@theme inline {
+  --font-sans: 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'Geist Mono Variable', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-subtle: var(--subtle);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-accent: var(--accent);
+  --color-accent-fg: var(--accent-fg);
+  --color-accent-soft: var(--accent-soft);
+}
+
+@theme {
+  --text-display: clamp(2.4rem, 1.6rem + 3.6vw, 4.25rem);
+  --text-display--line-height: 1.02;
+  --text-display--letter-spacing: -0.04em;
+
+  --text-heading: clamp(2rem, 1.45rem + 2.4vw, 3.4rem);
+  --text-heading--line-height: 1.05;
+  --text-heading--letter-spacing: -0.035em;
+
+  --text-title: clamp(1.4rem, 1.15rem + 1vw, 2rem);
+  --text-title--line-height: 1.15;
+  --text-title--letter-spacing: -0.025em;
+
+  --text-lead: clamp(1.05rem, 0.98rem + 0.35vw, 1.25rem);
+  --text-lead--line-height: 1.6;
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  line-height: 1.4;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--subtle);
+}
+
+@utility bg-grid {
+  background-image:
+    linear-gradient(to right, var(--line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--line) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+@layer base {
+  html {
+    background-color: var(--bg);
+    color: var(--fg);
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    @apply min-h-dvh bg-bg font-sans text-fg antialiased;
+    font-feature-settings: 'ss01', 'cv11';
+  }
+
+  ::selection {
+    background-color: var(--accent);
+    color: var(--accent-fg);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  [id] {
+    scroll-margin-top: 5rem;
+  }
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 280ms;
+  animation-timing-function: ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+}
